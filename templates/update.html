@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>register</title>
+</head>
+<body>
+
+    {% include 'header.html' %}
+    <div class="row">
+        <h2>Update username&password</h2>
+    </div>
+    <form action= "{% url 'update_user' %}" method = "post" class="col-md-9 m-auto" role="form">
+{% csrf_token %}
+                <div class="row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="inputusername">username</label>
+                        <input type="username" class="form-control mt-1" id="username" name="username" placeholder="username">
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="password">password</label>
+                        <input type="password" class="form-control mt-1" id="password" name="password" placeholder="password">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-end mt-2">
+                        <button type="submit" class="btn btn-success btn-lg px-3">submit</button>
+                    </div>
+                </div>
+            </form>
+            {% if message %}
+                <p> <strong>{{ message }}</strong></p>
+            {% endif %}
+
+    {% include 'footer.html' %}
+
+</body>
+</html>
