@@ -1,0 +1,30 @@
+{% load static %}
+{% include 'header.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>userdetails</title>
+       <form method= "post" action="{% url 'details_user' %}">
+        {% csrf_token %}
+        <input type="email" name ="email" placeholder="enter email"required>
+                <button type="submit">search</button>
+        </form>
+                {% if message %}
+                    {% for a in message %}
+                    <p>
+                        <strong> Name :</strong>{{ a.firstname }} {{ a.lastname }}<br>
+                        <strong> Father name :</strong>{{ a.fathername }}<br>
+                        <strong> email :</strong>{{ a.email }}<br>
+                        <strong> Mobile :</strong>{{ a.mobilenumber }}<br>
+                    </p>
+                    {% endfor %}
+                {% endif %}
+    </div>
+</head>
+<body>
+    {% include 'footer.html' %}
+</body>
+</html>

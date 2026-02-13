@@ -35,7 +35,9 @@ def user_update(request):
             return render(request,'update.html',{'message':'username already exists'})
         user.username = username
         if password:
-            user.set_password(password)
+            user.set_password(
+                
+                password)
         user.save()
 
         message = "username and password updated"

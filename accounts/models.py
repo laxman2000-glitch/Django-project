@@ -11,3 +11,15 @@ class Details(models.Model):
 
     def __str__(self):
         return f"{self.user.username}-{self.name}"
+
+class Shiva(models.Model):
+    firstname= models.CharField(max_length=255)
+    lastname= models.CharField(max_length=255)
+    fathername= models.CharField(max_length=255)
+    email= models.EmailField()
+    mobilenumber=models.CharField(max_length=20)
+
+    def __str__(self):
+        return f"{self.user.username}-{self.firstname}+{self.lastname}-{self.fathername}-{self.email}-{self.mobilenumber}"
+
+

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Details
+from .models import Details,Shiva
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
@@ -9,6 +9,11 @@ def register_page(request):
     message = None
 
     if request.method == "POST":
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        fathername = request.POST.get('fathername')
+        mobilenumber = request.POST.get('mobilenumber')
+        email = request.POST.get('email')
         username = request.POST.get('username')
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
@@ -18,6 +23,13 @@ def register_page(request):
         elif User.objects.filter(username=username).exists():
             message = "Username already exists"
         else:
+            Shiva.objects.create(
+                firstname= firstname,
+                lastname= lastname,
+                fathername= fathername,
+                email= email,
+                mobilenumber= mobilenumber
+                )
             user = User.objects.create_user(
                 username=username,
                 password=password
@@ -52,3 +64,13 @@ def search_page(request):
         message= Details.objects.filter(email=email)
 
     return render(request,'contact.html',{'message':message})
+
+def user_details(request):
+    message = None
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        
+        message = Shiva.objects.filter(email=email)
+
+    return render(request,'userdetails.html',{'message': message})
+         
